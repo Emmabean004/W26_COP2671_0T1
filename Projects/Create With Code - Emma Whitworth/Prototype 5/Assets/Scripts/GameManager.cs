@@ -12,20 +12,30 @@ public class GameManager : MonoBehaviour
 public List<GameObject> targets;
 private int score;
 public bool isGameActive;
-public Button restartButton;
+public GameObject titleScreen;
+    public Button restartButton;
 public TextMeshProUGUI scoreText;
 public TextMeshProUGUI gameOverText;
 private float spawnRate = 1.0f;
+public int difficulty;
+public void StartGame(int difficulty)
+{
+ StartCoroutine(SpawnTarget());
+ score = 0;
+ scoreText.gameObject.SetActive(true);
+ isGameActive = true;
+ UpdateScore(0);
+ titleScreen.gameObject.SetActive(false);
+ spawnRate /= difficulty;
+}
 public void RestartGame()
 {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Restarting Game...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 }
 void Start()
 {
-    StartCoroutine(SpawnTarget());
-    score = 0;
-    isGameActive = true;
-    UpdateScore(0);
+    
 }
 public void GameOver()
 {

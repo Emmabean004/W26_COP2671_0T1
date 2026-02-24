@@ -34,8 +34,11 @@ public class Target : MonoBehaviour
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
     public int pointValue;
-    private void OnMouseDown()
+    private void OnMouseDown() 
+    { if (targetRb != null) { OnClick(); } }
+    void OnClick()
     {
+        Debug.Log("Clicked on " + gameObject.name);
         Destroy(gameObject);
         if (gameManager.isGameActive)
         {
@@ -46,8 +49,9 @@ public class Target : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!gameObject.CompareTag("Bad")) { gameManager.GameOver(); }
         Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad")) { gameManager.GameOver(); }
+        
     }
 
 
