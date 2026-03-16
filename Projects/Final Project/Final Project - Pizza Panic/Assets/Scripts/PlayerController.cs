@@ -4,6 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float horizontalInput;
+    public int misses = 0;
+    public int score = 0;
     public float xRange = 10;
     public float speed = 10.0f;
     //public GameObject projectilePrefab;
@@ -30,5 +32,25 @@ public class PlayerController : MonoBehaviour
         }
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        if (misses >= 3)
+        {
+            Debug.Log("Game Over!");
+            Time.timeScale = 0;
+        }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Hazard"))
+        {
+            misses++;
+            Debug.Log("You Got Hit! " + (3 - misses) + "tries remaining");
+            
+        }
+        if (collision.gameObject.CompareTag("Collectible"))
+        {
+            score++;
+            Debug.Log("You Got A Collectible! Score:" + score);
+            
+        }
     }
 }
