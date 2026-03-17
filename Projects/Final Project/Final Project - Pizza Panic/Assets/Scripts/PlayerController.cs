@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using TMPro;
+using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -8,19 +9,27 @@ public class PlayerController : MonoBehaviour
     public int score = 0;
     public float xRange = 10;
     public float speed = 10.0f;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
+    float timeRemaining = 90;
     //public GameObject projectilePrefab;
     void Start()
     {
-
+        
+      
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        GameTimer();
+        scoreText.text = "Score: " + score;
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
-            // Launch a projectile from the player
-            //Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        // Launch a projectile from the player
+        //Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         //}
         if (transform.position.x < -xRange)
         {
@@ -43,14 +52,36 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Hazard"))
         {
             misses++;
-            Debug.Log("You Got Hit! " + (3 - misses) + "tries remaining");
-            
+            Debug.Log("You Got Hit! " + (3 - misses) + "tries remaining");            
         }
         if (collision.gameObject.CompareTag("Collectible"))
         {
+            //call the score function
             score++;
             Debug.Log("You Got A Collectible! Score:" + score);
             
         }
     }
+
+    // create a game timer that counts down from 60 seconds and ends the game when it reaches 0\
+    void GameTimer()
+    {
+
+        timeRemaining -= Time.deltaTime; // decrease the time remaining by the time that has passed since the last frame
+        // flash the text between red and white when the time remaining is less than 10 seconds
+        if (timeRemaining < 10)
+            {
+                timerText.color = Color.red;
+            }
+            else
+            {
+                timerText.color = Color.white;
+        }
+        if (timeRemaining <= 0)
+        {
+            Debug.Log("Time's Up! Final Score: " + score);
+            Time.timeScale = 0; // stop the game
+        }
+        timerText.text = Mathf.Ceil(timeRemaining).ToString(); // display the time remaining as an integer
+    }   
 }

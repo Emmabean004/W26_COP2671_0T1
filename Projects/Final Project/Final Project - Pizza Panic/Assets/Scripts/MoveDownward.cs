@@ -1,8 +1,10 @@
+
 using UnityEngine;
 
 public class MoveDownward : MonoBehaviour
 { 
     public GameObject player;
+    public int counterScore = 0;
     // find object for the plane
     public GameObject floor;
     [SerializeField] private float speed = 5.0f;
@@ -10,7 +12,6 @@ public class MoveDownward : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -18,15 +19,17 @@ public class MoveDownward : MonoBehaviour
     {
         transform.Translate(Vector3.down * Time.deltaTime * speed);
     }
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
+            
         }
         if (collision.gameObject.CompareTag("Floor"))
         {
             Destroy(gameObject);
+            
         }
     }
 }
