@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
+    public AudioClip collect;
+    public AudioClip hit;
+    public AudioSource musicSource;
+    public AudioSource audioSource;
     float timeRemaining = 90;
     //public GameObject projectilePrefab;
     void Start()
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         if (misses >= 3)
         {
+            //stop  the music
+            musicSource.Stop();
             Debug.Log("Game Over!");
             Time.timeScale = 0;
         }
@@ -52,6 +58,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Hazard"))
         {
             misses++;
+            // play hit sound
+            audioSource.PlayOneShot(hit, 1.0f);
             Debug.Log("You Got Hit! " + (3 - misses) + "tries remaining");            
         }
         if (collision.gameObject.CompareTag("Collectible"))
@@ -59,7 +67,8 @@ public class PlayerController : MonoBehaviour
             //call the score function
             score++;
             Debug.Log("You Got A Collectible! Score:" + score);
-            
+            // play collect sound
+            audioSource.PlayOneShot(collect, 1.0f);
         }
     }
 

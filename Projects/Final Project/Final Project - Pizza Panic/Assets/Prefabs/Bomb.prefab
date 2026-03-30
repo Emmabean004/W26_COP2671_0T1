@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4315b98d2428c074e9a6c1ab4956f904, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveDownward
   player: {fileID: 4541742838715464243, guid: 6f2f68e3f2c96304098e66cd8d51962c, type: 3}
+  counterScore: 0
   floor: {fileID: 2518724235848414278, guid: 2f862f7c1861a5448b4fcb336350d224, type: 3}
   speed: 5
 --- !u!54 &144647540579592161

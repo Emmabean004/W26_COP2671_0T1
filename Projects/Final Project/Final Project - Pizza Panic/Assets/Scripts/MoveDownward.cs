@@ -5,6 +5,7 @@ public class MoveDownward : MonoBehaviour
 { 
     public GameObject player;
     public int counterScore = 0;
+    
     // find object for the plane
     public GameObject floor;
     [SerializeField] private float speed = 5.0f;
@@ -24,7 +25,6 @@ public class MoveDownward : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
-            
         }
         if (collision.gameObject.CompareTag("Floor"))
         {

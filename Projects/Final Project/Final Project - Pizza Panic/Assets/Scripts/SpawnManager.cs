@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosZ = -4.4f;
     private float startDelay = 2;
     private int bombChance = 8;
-    private float spawnInterval = 1.5f;
+    private float spawnInterval = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
