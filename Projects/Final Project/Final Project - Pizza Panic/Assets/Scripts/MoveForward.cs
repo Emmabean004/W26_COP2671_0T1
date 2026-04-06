@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class MoveDownward : MonoBehaviour
+public class MoveForward : MonoBehaviour
 { 
     public GameObject player;
     public int counterScore = 0;
@@ -18,23 +18,17 @@ public class MoveDownward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime * speed);
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        if (transform.position.z > 10)
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.CompareTag("Floor"))
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Customer"))
         {
-            //if (gameObject.CompareTag("Collectible"))
-            //{
-            //
-            //    GameManager.instance.AddScore(-1);
-            //    }
-
-        Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

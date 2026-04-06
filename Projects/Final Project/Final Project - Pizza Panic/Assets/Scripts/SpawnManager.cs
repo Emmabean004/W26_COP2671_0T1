@@ -4,15 +4,19 @@ public class SpawnManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject[] objectPrefab;
+    public GameObject customer;
     private float spawnRangeX = 3;
     private float spawnPosZ = -4.4f;
+    private float customerSpawnPosZ = 2.5f; 
     private float startDelay = 2;
     private int bombChance = 8;
     private float spawnInterval = 1.0f;
+    private float customerSpawnInterval = 15.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InvokeRepeating("SpawnObjects", startDelay, spawnInterval);
+        InvokeRepeating("SpawnCustomer", startDelay, customerSpawnInterval);
     }
     void SpawnObjects()
     {
@@ -26,9 +30,15 @@ public class SpawnManager : MonoBehaviour
             objectIndex = 1;
         }
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 8, spawnPosZ);
+
         Instantiate(objectPrefab[objectIndex], spawnPos, objectPrefab[objectIndex].transform.rotation);
     }
 
+    void SpawnCustomer()
+    {
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 8, customerSpawnPosZ);
+        Instantiate(customer, spawnPos, customer.transform.rotation);
+    }
 
     void Update()
     {
