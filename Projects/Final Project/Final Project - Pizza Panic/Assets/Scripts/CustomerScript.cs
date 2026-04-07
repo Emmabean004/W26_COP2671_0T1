@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class CustomerScript : MonoBehaviour
 {
-    // Variable for the player's projectile, to detect collision.
 
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -32,6 +31,8 @@ public class CustomerScript : MonoBehaviour
         {
             StopCoroutine(DestroyAfterTime(5.0f));
 
+            // Play the chomp sound effect
+            PlayerController.instance.CustomerGetsPizza();
             // Add score to the player
             GameManager.instance.AddScore(5);
             // Destroy the projectile

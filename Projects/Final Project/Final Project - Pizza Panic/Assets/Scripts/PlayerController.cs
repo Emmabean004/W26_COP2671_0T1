@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using System.Collections;
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float horizontalInput;
     public float xRange = 10;
@@ -13,13 +14,14 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public AudioClip collect;
     public AudioClip hit;
+        public AudioClip Chomp;
     public AudioSource audioSource;
     //public GameObject projectilePrefab;
-    void Start()
+    void Awake()
     {
-        
-      
-        
+        instance = this;
+
+        Chomp = Resources.Load<AudioClip>("Music/chomp");
     }
 
     // Update is called once per frame
@@ -49,6 +51,11 @@ public class PlayerController : MonoBehaviour
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             GameManager.instance.AddProjectile(-1);
         }
+    }
+
+    public void CustomerGetsPizza()
+    {
+               audioSource.PlayOneShot(Chomp, 1.0f);
     }
     void OnCollisionEnter(Collision collision)
     {
