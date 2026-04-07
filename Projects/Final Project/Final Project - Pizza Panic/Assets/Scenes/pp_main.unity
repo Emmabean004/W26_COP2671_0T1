@@ -289,6 +289,12 @@ MonoBehaviour:
   - {fileID: 6616812292016852193, guid: 376e4160af224984487673e5104b8009, type: 3}
   - {fileID: 6870765785934854587, guid: a13c6aab6948066488862f462e0d2194, type: 3}
   customer: {fileID: 2153549186306080950, guid: 80b539dd1d6c65b469c153ad7874f756, type: 3}
+  spawnPosX:
+  - -3
+  - -1.5
+  - 0
+  - 1.5
+  - 3
 --- !u!4 &239753706
 Transform:
   m_ObjectHideFlags: 0
@@ -1807,6 +1813,10 @@ PrefabInstance:
       propertyPath: collect
       value: 
       objectReference: {fileID: 8300000, guid: f1d213a2a67762a45a0c40813cec550f, type: 3}
+    - target: {fileID: 823412311894227583, guid: 6f2f68e3f2c96304098e66cd8d51962c, type: 3}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 823412311894227583, guid: 6f2f68e3f2c96304098e66cd8d51962c, type: 3}
       propertyPath: scoreText
       value: 

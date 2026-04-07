@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int misses = 0;
     public int projectiles = 0;
     public float timeRemaining = 90;
-
+    
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
     // limit 3 misses, so we can use an array to store the miss text objects

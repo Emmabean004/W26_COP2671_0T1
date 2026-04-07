@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4731968976827436345}
   m_Layer: 0
   m_Name: Pizza_Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,4 +179,4 @@ MonoBehaviour:
   player: {fileID: 4541742838715464243, guid: 6f2f68e3f2c96304098e66cd8d51962c, type: 3}
   counterScore: 0
   floor: {fileID: 0}
-  speed: 5
+  speed: 10

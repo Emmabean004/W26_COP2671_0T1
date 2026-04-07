@@ -7,6 +7,8 @@ TagManager:
   - Collectible
   - Hazard
   - Floor
+  - Projectile
+  - Customer
   layers:
   - Default
   - TransparentFX

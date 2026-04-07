@@ -1,12 +1,15 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float horizontalInput;
     public float xRange = 10;
     public float speed = 10.0f;
+    public float fireRate = 0.5f; // Time between shots
+    private float nextFireTime = 0f; // Time when the player can fire again
     public GameObject projectilePrefab;
     public AudioClip collect;
     public AudioClip hit;
@@ -40,8 +43,9 @@ public class PlayerController : MonoBehaviour
         //code to shoot projectiles that are collected by the player below
         // code here
 
-        if (Input.GetKeyDown(KeyCode.Space) && GameManager.instance.projectiles > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.instance.projectiles > 0 && Time.time >= nextFireTime)
         {
+            nextFireTime = Time.time + fireRate;
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
             GameManager.instance.AddProjectile(-1);
         }
@@ -61,6 +65,10 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.AddProjectile(1);
         }
     }
+    public IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust the cooldown duration as needed
+    }
 
-    
+
 }
