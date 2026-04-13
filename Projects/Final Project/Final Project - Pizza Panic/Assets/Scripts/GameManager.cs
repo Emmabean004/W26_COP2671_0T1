@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public static bool isPaused = false;
+    public static bool canTogglePause = true;
     public int score = 0;
     public int misses = 0;
     public int projectiles = 0;
@@ -37,6 +38,10 @@ public class GameManager : MonoBehaviour
     {
         GameTimer();
         UpdateUI();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
     void GameTimer()
     {
@@ -92,7 +97,19 @@ public class GameManager : MonoBehaviour
             missText[2].color = Color.red;
         }
     }
-
+    public void TogglePause()
+    {
+        if (!canTogglePause) return;
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+        StartCoroutine(PauseCooldown(2.0f));
+    }
 
     public void UiVisibility(bool scoreVisibility, bool timerVisibility, bool missVisibility)
     {
@@ -119,9 +136,11 @@ public class GameManager : MonoBehaviour
         pauseText.gameObject.SetActive(false);
         UiVisibility(true, true, true);
     }
-    IEnumerator Wait(float seconds)
+    IEnumerator PauseCooldown(float seconds)
     {
+        canTogglePause = false;
         yield return new WaitForSecondsRealtime(seconds);
+        canTogglePause = true;
     }
     public void SaveScores()
     {

@@ -55,15 +55,6 @@ public class PlayerController : MonoBehaviour
                 GameManager.instance.AddProjectile(-1);
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Q) && GameManager.isPaused == false)
-        {
-            GameManager.instance.PauseGame();
-        }
-        else if (Input.GetKeyDown(KeyCode.Q) && GameManager.isPaused == true)
-            {
-                GameManager.instance.ResumeGame();
-        }
     }
 
     public void CustomerGetsPizza()
