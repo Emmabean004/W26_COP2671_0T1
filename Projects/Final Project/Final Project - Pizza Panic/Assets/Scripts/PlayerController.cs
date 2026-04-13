@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     public AudioClip collect;
     public AudioClip hit;
+    public GameObject explosionPrefab;
         public AudioClip Chomp;
     public AudioSource audioSource;
     //public GameObject projectilePrefab;
@@ -32,24 +33,36 @@ public class PlayerController : MonoBehaviour
         // Launch a projectile from the player
         //Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         //}
-        if (transform.position.x < -xRange)
-        {
-            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x > xRange)
-        {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-        }
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        //code to shoot projectiles that are collected by the player below
-        // code here
+        if (GameManager.isPaused == false)
+        { 
+            if (transform.position.x < -xRange)
+            {
+                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+            }
+            if (transform.position.x > xRange)
+            {
+                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+            }
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            //code to shoot projectiles that are collected by the player below
+            // code here
 
-        if (Input.GetKeyDown(KeyCode.Space) && GameManager.instance.projectiles > 0 && Time.time >= nextFireTime)
+            if (Input.GetKeyDown(KeyCode.Space) && GameManager.instance.projectiles > 0 && Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+                Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+                GameManager.instance.AddProjectile(-1);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && GameManager.isPaused == false)
         {
-            nextFireTime = Time.time + fireRate;
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-            GameManager.instance.AddProjectile(-1);
+            GameManager.instance.PauseGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && GameManager.isPaused == true)
+            {
+                GameManager.instance.ResumeGame();
         }
     }
 
@@ -63,6 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.instance.AddMiss();
             audioSource.PlayOneShot(hit, 1.0f);
+            Instantiate(explosionPrefab, transform.position, explosionPrefab.transform.rotation);
         }
 
         if (collision.gameObject.CompareTag("Collectible"))
