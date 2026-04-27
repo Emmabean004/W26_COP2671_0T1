@@ -9,6 +9,9 @@ TagManager:
   - Floor
   - Projectile
   - Customer
+  - Xplosion
+  - Music
+  - SFX
   layers:
   - Default
   - TransparentFX

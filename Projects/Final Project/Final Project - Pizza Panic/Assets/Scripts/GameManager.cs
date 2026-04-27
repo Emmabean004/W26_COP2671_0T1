@@ -24,13 +24,13 @@ public class GameManager : MonoBehaviour
     // limit 3 misses, so we can use an array to store the miss text objects
     public TextMeshProUGUI[] missText;
     public AudioSource musicSource;
-
     void Awake() // 
     {
         //assign color to all miss text to white at the start of the game
         missText[0].color = Color.white;
         missText[1].color = Color.white;
         missText[2].color = Color.white;
+        canTogglePause = true;
         instance = this;
         UiVisibility(true, true, true);
     }
@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
     {
         musicSource.Stop();
         gameOverText.gameObject.SetActive(true);
+        canTogglePause = false;
         gameOverScoreText.gameObject.SetActive(true);
         gameOverScoreText.text = "Final Score: " + score;
         highScoreText.gameObject.SetActive(true);
